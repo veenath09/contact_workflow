@@ -1,39 +1,36 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import router  # Import the router from routes
-
+from routes import api  # Make sure routes/api.py has `router` defined
 import logging
 
 app = FastAPI(title="Smart Contact Router API", version="1.0.0")
 
-# CORS Middleware
+# Optional: Enable CORS for frontend support
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict for production
+    allow_origins=["*"],  # Tighten this for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include modular routes
-app.include_router(router, prefix="/api")
+# Include your routes
+app.include_router(api.router, prefix="/api")
 
-# Health check
+# ✅ Health check endpoint
 @app.get("/health")
 def health_check():
     return {"status": "ok", "message": "Contact routing API is healthy."}
 
-# Startup event
+# ✅ Startup event
 @app.on_event("startup")
 async def on_startup():
     logging.info("🚀 FastAPI is starting up...")
+    # You could add DB connections, load cache, validate secrets here
+    # e.g., await db.connect()
 
-# Shutdown event
+# ✅ Shutdown event (optional)
 @app.on_event("shutdown")
 async def on_shutdown():
     logging.info("🛑 FastAPI is shutting down...")
-
-# Run with: python main.py
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)
+    # e.g., await db.disconnect()
