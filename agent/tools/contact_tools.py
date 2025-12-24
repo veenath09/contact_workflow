@@ -20,8 +20,8 @@ def send_client_email(user_subject, user_body, user_email):
         to (str): The recipient's email address.
         """
     
-    from_email = "veenathinrisedigital@gmail.com"
-    from_password = "dycb azhi uphg lwhj"
+    from_email = "test@gmail.com"
+    from_password = ""
 
     # Create a proper email message with UTF-8 encoding
     message = MIMEMultipart()
