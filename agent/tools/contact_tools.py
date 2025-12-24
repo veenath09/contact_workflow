@@ -52,8 +52,8 @@ def send_dept_email(department_subject, department_body, department_email):
         to (str): The recipient's email address.
         """
     
-    from_email = "veenathinrisedigital@gmail.com"
-    from_password = "dycb azhi uphg lwhj"
+    from_email = "test@gmail.com"
+    from_password = ""
 
     # Create a proper email message with UTF-8 encoding
     message = MIMEMultipart()
@@ -129,7 +129,7 @@ def log_request_to_sheet(user_name: str, user_email: str, message_content: str, 
         
         # Authorize and open the sheet
         client = gspread.authorize(creds)
-        spreadsheet_id = "1ST3IWDLgNNJESD5Kb4d6FquveuaOJt3_kkKXP3JgDUg"
+        spreadsheet_id = ""
         sheet = client.open_by_key(spreadsheet_id).sheet1
         
         # Generate timestamp and request ID
